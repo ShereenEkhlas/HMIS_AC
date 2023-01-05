@@ -1,0 +1,248 @@
+﻿@model HMIS_AC.Models.Employess
+@{
+    ViewBag.Title = "Edit Employee";
+}
+
+
+
+
+
+
+
+
+
+  <link href="~/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+
+    <!--begin::Post-->
+    <div class="post d-flex flex-column-fluid" id="kt_post">
+
+        <!--begin::Container-->
+        <div id="kt_content_container" class="container">
+
+            <!--begin::Basic info-->
+            <div class="shadow-lg shadow-success p-3 mb-10 bg-body rounded">
+
+                <div class="d-flex ">
+
+                    <!--begin::Card header-->
+                    <div class="card-header border-0 cursor-pointer" role="button" data-bs-toggle="collapse" data-bs-target="#kt_account_profile_details" aria-expanded="true" aria-controls="kt_account_profile_details">
+                        <!--begin::Card title-->
+
+
+                        <div class="card-title m-0">
+
+                            <h3 class="fw-bolder m-0">Profile Details</h3>
+
+                        </div>
+                        <!--end::Card title-->
+                    </div>
+
+                </div>
+                <!--begin::Card header-->
+                <!--begin::Content-->
+                <div id="kt_account_profile_details" class="collapse show">
+                    <!--begin::Form-->
+                    <form id="kt_account_profile_details_form" action="/Employee/EditEmployee"  method="post" class="form" enctype="multipart/form-data">
+                         @Html.AntiForgeryToken()
+
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <!--begin::Card body-->
+                        <div class="card-body border-top p-9">
+                                <input type="text" name="EmployeeId" value="@Model.EmployeeId"  required hidden/>
+
+                            <!--begin::Input group-->
+                            <div class="row mb-6" data-bs-toggle="tooltip" data-bs-custom-class="tooltip-dark" data-bs-dismiss="click" data-bs-placement="top" title="الاسم">
+                                <!--begin::Label-->
+                                <label class="col-lg-3 col-form-label required fw-bold fs-6">Full Name</label>
+                                <!--end::Label-->
+                                <!--begin::Col-->
+                                <div class="col-lg-9">
+
+                                    <input type="text" name="EmployeeName" value="@Model.EmployeeName" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="Full name"  required/>
+ 
+                                    
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div class="row mb-6" data-bs-toggle="tooltip" data-bs-custom-class="tooltip-dark" data-bs-dismiss="click" data-bs-placement="top" title="الرقم القومى">
+                                <!--begin::Label-->
+                                <label class="col-lg-3 col-form-label required fw-bold fs-6">National ID</label>
+                                <!--end::Label-->
+                                <!--begin::Col-->
+                                <div class="col-lg-9">
+
+                                    <input type="text" name="EmployeeNid" value="@Model.EmployeeNid" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="National ID"  required/>
+
+
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div class="row mb-6" data-bs-toggle="tooltip" data-bs-custom-class="tooltip-dark" data-bs-dismiss="click" data-bs-placement="top" title=" العنوان">
+                                <!--begin::Label-->
+                                <label class="col-lg-3 col-form-label required fw-bold fs-6">Address</label>
+                                <!--end::Label-->
+                                <!--begin::Col-->
+                                <div class="col-lg-9 fv-row">
+
+                                    <input type="text" name="EmployeeAddress" value="@Model.EmployeeAddress" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="Address" />
+
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div class="row mb-6" data-bs-toggle="tooltip" data-bs-custom-class="tooltip-dark" data-bs-dismiss="click" data-bs-placement="top" title="الايميل">
+                                <!--begin::Label-->
+                                <label class="col-lg-3 col-form-label  fw-bold fs-6">Email</label>
+                                <!--end::Label-->
+                                <!--begin::Col-->
+                                <div class="col-lg-9 fv-row">
+
+                                    <input type="text" name="EmployeeEmail" value="@Model.EmployeeEmail" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="Email" />
+
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Input group-->
+                           
+                          
+                           
+                            <!--begin::Input group-->
+                            <div class="row mb-6">
+                                <!--begin::Label-->
+                                <label class="col-lg-3 col-form-label required fw-bold fs-6">Telephone</label>
+                                <!--end::Label-->
+                                <!--begin::Col-->
+                                <!--begin::Col-->
+                                <div class="col-lg-9 fv-row">
+                                    <div class="row">
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6 fv-row">
+
+
+                                            <input type="text" name="EmployeeTel" value="@Model.EmployeeTel" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0"  placeholder = "Telephone(1)" pattern="01[0-2,5]{1}[0-9]{8}"  required/>
+                                        </div>
+                                        <!--end::Col-->
+                                        <div class="col-lg-6 fv-row">
+
+                                            <input type="text" name="EmployeeTel2" value="@Model.EmployeeTel2" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0"  placeholder = "Telephone(2)" pattern="01[0-2,5]{1}[0-9]{8}"  />
+
+                                        </div>
+                                        
+
+                                    </div>
+
+                                </div>
+                                <!--end::Col-->
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Input group-->
+                            
+                           
+                             <!--begin::Input group-->
+                            <div class="row mb-6">
+                                <!--begin::Label-->
+                                <label class="col-lg-3 col-form-label required fw-bold fs-6">Department</label>
+                                <!--end::Label-->
+                                <!--begin::Col-->
+                                <!--begin::Col-->
+                                <div class="col-lg-9 fv-row">
+                                    <div class="row">
+                                         <div class="col-lg-6 fv-row">
+
+                                            <select data-control="select2" name="DepartId" id="department" data-placeholder="Select a Department" class="form-control form-control-solid" required>
+                                                <option></option>
+                                                @Html.Raw(ViewBag.Departments)
+                                            </select>
+
+
+                                            @Html.ValidationMessageFor(model => model.DepartId, "", new { @class = "text-danger" })
+
+                                        </div>
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6 fv-row">
+                                           @Html.DropDownListFor(model => model.Gender, new List<SelectListItem>
+                                                              {
+                                                                     new SelectListItem{ Text="Male", Value = "M"},
+                                                                     new SelectListItem{ Text="Female", Value = "F" },
+                                                              }, new { @class = "form-select form-select-solid form-select-lg", @data_val = "true", @required = "required" /*, @id= "status"*/ })
+    
+
+                                            
+                                        </div>
+                                        <!--end::Col-->
+                                       
+
+                                        
+
+                                    </div>
+
+                                </div>
+                                <!--end::Col-->
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Input group-->
+                             <!--begin::Input group-->
+                            <div class="row mb-6" data-bs-toggle="tooltip" data-bs-custom-class="tooltip-dark" data-bs-dismiss="click" data-bs-placement="top" title="تاريخ التعيين">
+                                <!--begin::Label-->
+                                <label class="col-lg-3 col-form-label required fw-bold fs-6">Hiring Date</label>
+                                <!--end::Label-->
+                                <!--begin::Col-->
+                                <div class="col-lg-9">
+
+                                    
+                                            
+                                    <input class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" name="HiringDate" value="@Model.HiringDate" placeholder="Hiring Date" id="kt_datepicker_2" required/>
+                                           
+                                    @Html.ValidationMessageFor(model => model.HiringDate, "", new { @class = "text-danger" })
+                                    
+ 
+                                    
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Input group-->
+                         
+                            <!--begin::Card footer-->
+                            <div class="card-footer d-flex justify-content-end py-6 px-9">
+                                <button class="btn btn-primary px-6" type="submit">Edit Employee</button>
+
+                            </div>
+                            <!--end::Card footer-->
+                        </div>
+                        <!--end::Card body-->
+
+                    </form>
+                    <!--end::Form-->
+                </div>
+                <!--end::Content-->
+            </div>
+            <!--end::Basic info-->
+   
+
+        </div>
+        <!--end::Container-->
+    </div> <!--end::Post-->
+    <script src="~/plugins/global/plugins.bundle.js"></script>
+    <script>
+       // $(document).ready(function() { 
+        // $('#department').select2();
+            $('#department').val(@Model.DepartId);
+           
+           //  $(document).ready(function() {
+                 $("#kt_datepicker_2").flatpickr();
+            //});
+            //var d = new Date();
+           // d = '@Model.HiringDate';
+            
+           // document.getElementById("kt_datepicker_2").defaultValue = moment(d).format('YYYY-MM-DD');
+       
+    </script>
+
+
+

@@ -1,0 +1,458 @@
+﻿@model IEnumerable<HMIS_AC.Models.Employess>
+@{
+    Layout = null;
+}
+<style>
+
+
+    .filterIcon {
+        height: 16px;
+        width: 16px;
+    }
+
+    .modalFilter {
+        display: none;
+        height: auto;
+        background: #FFF;
+        border: solid 1px #ccc;
+        padding: 8px;
+        position: absolute;
+        z-index: 1001;
+    }
+
+        .modalFilter .modal-content {
+            max-height: 250px;
+            overflow-y: auto;
+        }
+
+        .modalFilter .modal-footer {
+            background: #FFF;
+            height: auto;
+            padding-top: 6px;
+        }
+    /*
+        .modalFilter .btn {
+            padding: 0 1em;
+            height: 28px;
+            line-height: 28px;
+            text-transform: none;
+        }*/
+
+    #mask {
+        display: none;
+        background: transparent;
+        position: fixed;
+        left: 0;
+        top: 0;
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+        opacity: 1000;
+    }
+</style>
+
+<!--begin::Table-->
+<div id="mask"></div>
+<table class="table table-striped table-row-bordered gy-5 gs-7" id="_Emptable">
+    <!--begin::Table head-->
+    <thead>
+        <!--begin::Table row-->
+
+        <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
+
+            <th class="min-w-25px">Actions</th>
+            <th class="min-w-90px">Name</th>
+             
+            <th class="min-w-90px">No.Id</th>
+            <th class="min-w-90px">Address</th>
+             <th class="min-w-90px">Email</th>
+            <th class="min-w-90px">Phone 1</th>
+            <th class="min-w-90px">Phone 2</th>
+            <th class="min-w-90px">Hiring Date</th>
+           
+
+
+        </tr>
+        <!--end::Table row-->
+    </thead>
+    <!--end::Table head-->
+
+</table>
+<!--end::Table-->
+
+<script>
+
+
+
+var datatab = $('#_Emptable').DataTable ({
+
+    //"order": [[5, "asc"]],
+
+
+
+    "ajax": {
+        "url": "/Employee/LoadJsonEmployee",
+        "type": "GET",
+        "datatype": "json"
+        
+    },
+    
+    "columns": [
+            {
+                "data": "EmployeeId",
+                "render": function (data) {
+
+                  
+                            return   "<a class='btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1'  href='/Employee/EditEmployee?id="+data+"'><span class='svg-icon svg-icon-3'><svg xmlns='http://www.w3.org/2000/svg' width='24px' height='24px' viewBox='0 0 24 24' version='1.1'><path d='M12.2674799,18.2323597 L12.0084872,5.45852451 C12.0004303,5.06114792  12.1504154,4.6768183 12.4255037,4.38993949 L15.0030167,1.70195304 L17.5910752,4.40093695 C17.8599071,4.6812911 18.0095067,5.05499603 18.0083938,5.44341307 L17.9718262,18.2062508 C17.9694575,19.0329966 17.2985816,19.701953 16.4718324,19.701953 L13.7671717,19.701953 C12.9505952,19.701953 12.2840328,19.0487684 12.2674799,18.2323597 Z' fill='#000000' fill-rule='nonzero' transform='translate(14.701953, 10.701953) rotate(-135.000000) translate(-14.701953, -10.701953)' /><path d='M12.9,2 C13.4522847,2 13.9,2.44771525 13.9,3 C13.9,3.55228475 13.4522847,4 12.9,4 L6,4 C4.8954305,4 4,4.8954305 4,6 L4,18 C4,19.1045695 4.8954305,20 6,20 L18,20 C19.1045695,20 20,19.1045695 20,18 L20,13 C20,12.4477153 20.4477153,12 21,12 C21.5522847,12 22,12.4477153 22,13 L22,18 C22,20.209139 20.209139,22 18,22 L6,22 C3.790861,22 2,20.209139 2,18 L2,6 C2,3.790861 3.790861,2 6,2 L12.9,2 Z' fill='#000000' fill-rule='nonzero' opacity='0.3' /></svg></span>  </a>";
+
+
+
+
+
+
+
+
+
+                    
+
+
+
+
+
+
+
+
+                         // return "<a href='/Vendor/VendorDetails?id=" + data + "' target='_blank'>" + data + "</a>";
+                }
+            },
+        
+            {
+                "data": "EmployeeName",
+                 "render": function (data, type, row, meta) {
+                     
+                    return "<a href='#' class='text-gray-800 text-hover-primary mb-1'>" + data + "</a>" ;
+                }
+                
+            },
+            
+            {
+                "data": "EmployeeNid",
+                "render": function (data) {
+
+                    return "<a href='#' class='text-gray-800 text-hover-primary mb-1'>" + data + "</a>";
+                }
+                
+            },
+            {
+                
+                 "data": "EmployeeAddress",
+                "render": function (data, type, row, meta) {
+
+                    return "<a href='" + data + "'target='_blank'>" + data + "</a>";
+
+                }
+            },
+            {
+                "data": "EmployeeEmail",
+                 "render": function (data, type, row, meta) {
+
+                    return "<a href='#' class='text-gray-800 text-hover-primary mb-1'>" + data + "</a>";
+                }
+            },
+            {
+                "data": "EmployeeTel",
+                 "render": function (data, type, row, meta) {
+
+                    return "<a href='#' class='text-gray-800 text-hover-primary mb-1'>" + data + "</a>";
+                }
+            },
+            {
+                
+                "data": "EmployeeTel2",
+                 "render": function (data, type, row, meta) {
+
+                    return "<a href='#' class='text-gray-800 text-hover-primary mb-1'>" + data + "</a>";
+                }
+                
+            },
+            {
+                
+                "data": "HiringDate",
+                 "render": function (data, type, row, meta) {
+
+                    return "<a href='#' class='text-gray-800 text-hover-primary mb-1'>" + moment(data).format("DD-MM-YYYY") + "</a>";
+                }
+                
+            }
+            
+
+
+        ],
+     
+});
+
+
+ $('#_Emptable tbody').on('click', 'tr', function () {
+        var data = datatab.row( this ).data();
+        console.log( 'You clicked on '+data.PatientId+'\'s row' );
+    } );
+
+
+
+    //$(document).ready(function () {
+
+    //    $('#_table tbody').on('click', 'tr', function () {
+    //        if ($(this).hasClass('selected')) {
+    //            $(this).removeClass('selected');
+
+    //        } else {
+    //            datatab.$('tr.selected').removeClass('selected');
+    //            $(this).addClass('selected');
+
+    //        }
+    //    });
+
+
+
+    //    $("#_table>tbody>tr:first").trigger('click');
+
+
+    //});
+
+
+
+   
+
+    function configFilter($this, colArray) {
+        setTimeout(function () {
+            var tableName = $this[0].id;
+            var columns = $this.api().columns();
+            $.each(colArray, function (i, arg) {
+                $('#' + tableName + ' th:eq(' + arg + ')').append('<img src="http://www.icone-png.com/png/39/38556.png" class="filterIcon" onclick="showFilter(event,\'' + tableName + '_' + arg + '\')" />');
+            });
+
+            var template = '<div class="modalFilter">' +
+                '<div class="modal-content">' +
+                '{0}</div>' +
+                '<div class="modal-footer d-flex justify-content-sm-between">' +
+                '<button onclick="clearFilter(this, {1}, \'{2}\');"  class="btn btn-sm btn-danger">Clear</button>' +
+                '<button onclick="performFilter(this, {1}, \'{2}\');" class="btn btn-sm  btn-primary">Filter</button>' +
+                '<button onclick="SelectAllFilter(this);" class="btn btn-sm  btn-info">Select All</button>' +
+                '</div>' +
+                '</div>';
+            $.each(colArray, function (index, value) {
+                columns.every(function (i) {
+                    if (value === i) {
+                        var column = this, content = '<input type="text" class="form-control" placeholder="Search" onkeyup="filterValues(this)"/> <br/>';
+                        var columnName = $(this.header()).text().replace(/\s+/g, "_");
+                        var distinctArray = [];
+                        column.data().each(function (d, j) {
+                            if (distinctArray.indexOf(d) == -1) {
+                                distinctArray.push(d);
+                            }
+
+                        });
+                        distinctArray.sort();
+                        for (var i = 0; i < distinctArray.length; i++) {
+                            var id = tableName + "_" + columnName + "_" + i; // onchange="formatValues(this,' + value + ');
+                            $(document).click((event) => {
+                                if (!$(event.target).closest('.modalFilter').length) {
+                                    // the click occured outside '#element'
+                                    $('.modalFilter').hide();
+                                    $('#mask').hide();
+                                }
+                            });
+                            content += '<div><input type="checkbox" data-col="' + value + '" value="' + distinctArray[i].trim() + '"  id="' + id + '"/> <label class="fw-bolder fs-6" for="' + id + '">' + distinctArray[i].trim() + '</label></div>';
+                        }
+                        //column.data().each(function (d, j) {
+                        //    if (distinctArray.indexOf(d) == -1) {
+                        //        var id = tableName + "_" + columnName + "_" + j; // onchange="formatValues(this,' + value + ');
+                        //        content += '<div><input type="checkbox" value="' + d.trim() + '"  id="' + id + '"/> <label class="fw-bolder fs-6" for="' + id + '">' + d + '</label></div>';
+                        //        distinctArray.push(d);
+                        //    }
+                        //});
+                        var newTemplate = $(template.replace('{0}', content).replace('{1}', value).replace('{1}', value).replace('{2}', tableName).replace('{2}', tableName));
+                        $('body').append(newTemplate);
+                        modalFilterArray[tableName + "_" + value] = newTemplate;
+                        content = '';
+                    }
+                });
+            });
+        }, 50);
+    }
+    var modalFilterArray = {};
+    //User to show the filter modal
+    function showFilter(e, index) {
+        $('.modalFilter').hide();
+        $(modalFilterArray[index]).css({ left: 0, top: 0 });
+        var th = $(e.target).parent();
+        var pos = th.offset();
+        /*console.log(th);*/
+        /*$(modalFilterArray[index]).width(th.width() * 0.75);*/
+        $(modalFilterArray[index]).css({ 'left': pos.left, 'top': pos.top });
+        $(modalFilterArray[index]).show();
+        $('#mask').show();
+        e.stopPropagation();
+    }
+
+    //This function is to use the searchbox to filter the checkbox
+    function filterValues(node) {
+        var searchString = $(node).val().toUpperCase().trim();
+        var rootNode = $(node).parent();
+        if (searchString == '') {
+            rootNode.find('div').show();
+        } else {
+            rootNode.find("div").hide();
+            rootNode.find("div:contains('" + searchString + "')").show();
+        }
+    }
+
+    //Execute the filter on the table for a given column
+    function performFilter(node, i, tableId) {
+        var rootNode = $(node).parent().parent();
+        var searchString = '', counter = 0;
+
+        rootNode.find('input:checkbox').each(function (index, checkbox) {
+            var col = $(checkbox).data("col");
+            if (checkbox.checked) {
+                let value = escapeRegex(checkbox.value.trim());
+                searchString += (counter == 0) ? '^' + value + '$' : '|' + '^' + value + '$';
+                counter++;
+            }
+        });
+        //$('#' + tableId).DataTable().column(i).search(
+        //    searchString,
+        //    true, false
+        //).draw();
+        $('#' + tableId).DataTable().column(i).search(
+            searchString,
+            true, false
+        ).draw();
+        rootNode.hide();
+        $('#mask').hide();
+        //sum();
+    }
+
+    //Removes the filter from the table for a given column
+    function clearFilter(node, i, tableId) {
+        var rootNode = $(node).parent().parent();
+        rootNode.find(".filterSearchText").val('');
+        rootNode.find('input:checkbox').each(function (index, checkbox) {
+            checkbox.checked = false;
+            $(checkbox).parent().show();
+        });
+        //$('#' + tableId).DataTable().column(i).search(
+        //    '',
+        //    true, false
+        //).draw();
+        //rootNode.hide();
+        //$('#mask').hide();
+        //sum();
+    }
+    function SelectAllFilter(node) {
+        var rootNode = $(node).parent().parent();
+        rootNode.find(".filterSearchText").val('');
+        rootNode.find('input:checkbox').each(function (index, checkbox) {
+            checkbox.checked = true;
+            $(checkbox).prop("checked", true);
+            $(checkbox).parent().show();
+        });
+        //$('#' + tableId).DataTable().column(i).search(
+        //    '',
+        //    true, false
+        //).draw();
+        //rootNode.hide();
+        //$('#mask').hide();
+        //sum();
+    }
+
+    function escapeRegex(string) {
+        return string.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+    }
+
+
+        //For Delete Service
+    function deleteEvent(index) {
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: 'btn btn-success',
+                cancelButton: 'btn btn-danger'
+            },
+            buttonsStyling: false
+        })
+
+        swalWithBootstrapButtons.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'No, cancel!',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+
+                $.ajax({
+                    url: "/Patient/DeletePatient?id=" + index,
+                    type: "POST",
+                    dataType: "json",
+                    async: false,
+                    cashe: false,
+                    data: { id: index },
+                    success: function (res) {
+                        console.log(res)
+                        if (res.deleted) {
+                            swalWithBootstrapButtons.fire(
+                                'Deleted!',
+                                'Your Service has been deleted.',
+                                'success'
+                            )
+                           // loadSelf('/Vendor/EditContacts?id=ViewBag.cid')
+                           loadPartial('/Patient/LoadPatients', 'loadtable');
+
+                        } else {
+                            swalWithBootstrapButtons.fire(
+                                'Can Not Delete!',
+                                'Your Patient Can not be deleted.',
+                                'error'
+                            )
+
+
+
+                        }
+
+
+
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        // console.log("jqXHR : " + jqXHR + " text status : " + textStatus + " error : " + errorThrown);
+                        alert("jqXHR : " + jqXHR + " text status : " + textStatus + " error : " + errorThrown);
+                        swalWithBootstrapButtons.fire(
+                            'Error',
+                            errorThrown,
+                            'error'
+                        )
+                        //location.reload();
+
+
+
+                    }
+                });
+
+            } else if (
+                /* Read more about handling dismissals below */
+                result.dismiss === Swal.DismissReason.cancel
+            ) {
+                swalWithBootstrapButtons.fire(
+                    'Cancelled',
+                    'Your Service Is Canceled.',
+                    'error'
+                )
+            }
+        })
+    }
+
+
+
+</script>
